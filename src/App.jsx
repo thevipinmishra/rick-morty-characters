@@ -231,27 +231,29 @@ function App() {
           </Box>
         )}
       </Container>
-      <Box
-        css={{
-          marginBlockStart: 70,
-          textAlign: "center",
-          fontSize: 16,
+      {!isLoading && (
+        <Box
+          css={{
+            marginBlockStart: 70,
+            textAlign: "center",
+            fontSize: 16,
 
-          "& > a": {
-            color: "$primary",
-            textDecoration: "none",
-          },
-          "@lg": {
-            fontSize: 18,
-            fontWeight: 600,
-          },
-        }}
-      >
-        Built by{" "}
-        <a href="https://vipinmishra.dev/" target="_blank">
-          Vipin Mishra
-        </a>
-      </Box>
+            "& > a": {
+              color: "$primary",
+              textDecoration: "none",
+            },
+            "@lg": {
+              fontSize: 18,
+              fontWeight: 600,
+            },
+          }}
+        >
+          Built by{" "}
+          <a href="https://vipinmishra.dev/" target="_blank">
+            Vipin Mishra
+          </a>
+        </Box>
+      )}
     </Box>
   );
 }
