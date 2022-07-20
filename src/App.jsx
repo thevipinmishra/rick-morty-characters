@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { IconSearch, IconChevronRight, IconChevronLeft } from "@tabler/icons";
 import { usePagination } from "@mantine/hooks";
+
 import { globalCss } from "../stitches.config";
 import Box from "./components/Box";
 import Stack from "./components/Stack";
@@ -11,9 +11,7 @@ import Input from "./components/Input";
 import Container from "./components/Container";
 import Typography from "./components/Typography";
 import CharacterItem from "./components/Character";
-
 import api from "./utils/axios";
-import { IconSearch } from "@tabler/icons";
 
 /* Setting the global styles for the app. */
 const globalStyles = globalCss({
@@ -182,7 +180,7 @@ function App() {
                 }}
                 onClick={() => pagination.previous()}
               >
-                <ChevronLeftIcon />
+                <IconChevronLeft />
               </IconButton>
               {pagination.range.map((item, i) =>
                 typeof item === "number" ? (
@@ -225,7 +223,7 @@ function App() {
                 }}
                 onClick={() => pagination.next()}
               >
-                <ChevronRightIcon />
+                <IconChevronRight />
               </IconButton>
             </Stack>
           </Box>
