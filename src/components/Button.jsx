@@ -21,8 +21,11 @@ const Button = styled("button", {
   padding: ".8rem 1.75rem",
   cursor: "pointer",
   borderRadius: ".4rem",
-  backgroundColor: "#2980b9",
+  backgroundColor: "$primary",
   color: "#fff",
+  "&:focus-visible": {
+    outline: "2px dotted $primary",
+  },
 
   variants: {
     size: {

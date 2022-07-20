@@ -13,6 +13,7 @@ import Typography from "./components/Typography";
 import CharacterItem from "./components/Character";
 
 import api from "./utils/axios";
+import { IconSearch } from "@tabler/icons";
 
 /* Setting the global styles for the app. */
 const globalStyles = globalCss({
@@ -44,11 +45,8 @@ function App() {
   const pagination = usePagination({
     total: paginationInfo.pages,
     initialPage: 1,
-    siblings: 2,
   });
 
-  /* A ternary operator that checks if the search is empty or not. If it is empty, it will return the
-page number. If it is not empty, it will return the search query. */
   const filterURL =
     search.length > 0 ? `/?name=${search}` : `?page=${pagination.active}`;
 
@@ -94,38 +92,72 @@ page number. If it is not empty, it will return the search query. */
           Rick Morty API
         </Typography>
 
+        <Box
+          css={{
+            position: "relative",
+            marginBlock: "2rem",
+            "@lg": {
+              maxWidth: "600px",
+              marginInline: "auto",
+              marginBlock: "3rem",
+            },
+          }}
+        >
+          <Input
+            placeholder={`Search all ${paginationInfo.count} characters`}
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            css={{
+              padding: ".75rem 1rem .75rem 3rem",
+              "@lg": {
+                padding: "1rem 2rem 1rem 3rem",
+                fontSize: 18,
+              },
+            }}
+          />
+          <Box
+            css={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 50,
+              "& > svg": {
+                width: 16,
+                "@lg": {
+                  width: 24,
+                },
+              },
+            }}
+          >
+            <IconSearch />
+          </Box>
+        </Box>
+
         {isLoading ? (
-          <p>Loading...</p>
+          <Box css={{ textAlign: "center" }}>
+            <Typography as="h2" css={{ fontSize: "1.5rem", fontWeight: 700 }}>
+              Loading...
+            </Typography>
+          </Box>
         ) : (
-          <Stack gap={2}>
-            <Input
-              placeholder={`Search all ${paginationInfo.count} characters`}
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              css={{
-                "@lg": {
-                  padding: "1rem 2rem",
-                  maxWidth: "600px",
-                  marginInline: "auto",
-                  fontSize: 18,
-                  marginBlock: "3rem",
-                },
-              }}
-            />
-            <Box
-              css={{
-                display: "grid",
-                gap: "1rem",
-                "@lg": {
-                  gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))",
-                },
-              }}
-            >
-              {characters.map((person) => (
-                <CharacterItem key={person.id} data={person} />
-              ))}
-            </Box>
-          </Stack>
+          <Box
+            css={{
+              display: "grid",
+              gap: "1rem",
+              "@lg": {
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              },
+            }}
+          >
+            {characters.map((person) => (
+              <CharacterItem key={person.id} data={person} />
+            ))}
+          </Box>
         )}
 
         {/* Pagination  */}
@@ -134,7 +166,7 @@ page number. If it is not empty, it will return the search query. */
           <Box css={{ marginBlockStart: 50 }}>
             <Stack
               direction="row"
-              css={{ gap: "10px", justifyContent: "center" }}
+              css={{ gap: "10px", justifyContent: "center", flexWrap: "wrap" }}
             >
               <IconButton
                 disabled={pagination.active === 1}
@@ -199,6 +231,27 @@ page number. If it is not empty, it will return the search query. */
           </Box>
         )}
       </Container>
+      <Box
+        css={{
+          marginBlockStart: 70,
+          textAlign: "center",
+          fontSize: 16,
+
+          "& > a": {
+            color: "$primary",
+            textDecoration: "none",
+          },
+          "@lg": {
+            fontSize: 18,
+            fontWeight: 600,
+          },
+        }}
+      >
+        Built by{" "}
+        <a href="https://vipinmishra.dev/" target="_blank">
+          Vipin Mishra
+        </a>
+      </Box>
     </Box>
   );
 }

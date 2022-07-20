@@ -11,12 +11,11 @@ export const {
   config,
 } = createStitches({
   theme: {
-    colors: {
-      gray400: "gainsboro",
-      gray500: "lightgray",
-    },
     fonts: {
       sansSerif: "Outfit, sans-serif",
+    },
+    colors: {
+      primary: "#2980b9",
     },
   },
   media: {

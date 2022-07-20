@@ -10,7 +10,7 @@ import {
 } from "./Dialog";
 import Button from "./Button";
 import Image from "./Image";
-import { Cross2Icon, InfoCircledIcon } from "@radix-ui/react-icons";
+import { IconInfoCircle, IconX } from "@tabler/icons";
 import Typography from "./Typography";
 
 const CharacterBox = styled("div", {
@@ -49,6 +49,9 @@ const CharacterItem = ({ data }) => {
             fontSize: "1.25rem",
             lineHeight: 1.3,
             color: "#2c3e50",
+            "@lg": {
+              fontSize: "1.5rem",
+            },
           }}
         >
           {data.name}
@@ -60,45 +63,85 @@ const CharacterItem = ({ data }) => {
           <Dialog>
             <DialogTrigger asChild>
               <Button size="small">
-                <InfoCircledIcon /> More Info
+                <IconInfoCircle /> More Info
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogTitle
-                css={{ fontWeight: 800, fontSize: 20, marginBlockEnd: 20 }}
+                css={{
+                  fontWeight: 800,
+                  fontSize: 20,
+                  marginBlockEnd: 40,
+                  color: "#212529",
+                  "@lg": {
+                    fontSize: 40,
+                  },
+                }}
               >
                 {data.name}
               </DialogTitle>
 
               <Box
-                as="ul"
-                css={{ listStylePosition: "inside", listStyleType: "square" }}
+                css={{
+                  "@lg": {
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "2rem",
+                  },
+                }}
               >
-                <Box css={{ marginBlockEnd: 20 }}>
+                <Box
+                  css={{
+                    marginBlockEnd: 20,
+                    "@lg": {
+                      marginBlockEnd: "0",
+                    },
+                  }}
+                >
                   <Image
                     css={{
                       height: 120,
                       width: 120,
                       objectFit: "cover",
                       borderRadius: ".5rem",
+                      "@lg": {
+                        height: 200,
+                        width: 200,
+                      },
                     }}
                     src={data.image}
                     alt={data.name}
                   />
                 </Box>
-                <Box as="li">{data.species}</Box>
-                <Box as="li">{data.gender}</Box>
-                <Box as="li">
-                  Appeared in <b>{data.episode.length}</b> Episodes
-                </Box>
-                <Box as="li">
-                  Last Location was <b>{data.location.name}</b>
+
+                <Box
+                  as="ul"
+                  css={{
+                    listStylePosition: "inside",
+                    listStyleType: "square",
+                    flex: 1,
+                    fontSize: "1.2rem",
+                    "& > li": {
+                      "@lg": {
+                        paddingBlock: ".25rem",
+                      },
+                    },
+                  }}
+                >
+                  <Box as="li">{data.species}</Box>
+                  <Box as="li">{data.gender}</Box>
+                  <Box as="li">
+                    Appeared in <b>{data.episode.length}</b> Episodes
+                  </Box>
+                  <Box as="li">
+                    Last Location was <b>{data.location.name}</b>
+                  </Box>
                 </Box>
               </Box>
 
               <DialogClose asChild>
                 <IconButton>
-                  <Cross2Icon />
+                  <IconX />
                 </IconButton>
               </DialogClose>
             </DialogContent>

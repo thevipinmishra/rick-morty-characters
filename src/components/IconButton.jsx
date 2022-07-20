@@ -6,7 +6,6 @@ const IconButton = styled("button", {
   backgroundColor: "transparent",
   cursor: "pointer",
   boxSizing: "border-box",
-  cursor: "pointer",
   $$size: "30px",
   height: "$$size",
   width: "$$size",
@@ -14,6 +13,10 @@ const IconButton = styled("button", {
   justifyContent: "center",
   alignItems: "center",
   fontFamily: "inherit",
+  flexShrink: 0,
+  "&:focus-visible": {
+    outline: "2px dotted $primary",
+  },
 });
 
 export default IconButton;

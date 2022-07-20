@@ -7,15 +7,15 @@ const overlayShow = keyframes({
 });
 
 const contentShow = keyframes({
-  "0%": { opacity: 0, transform: "translate(-50%, -48%) scale(.96)" },
+  "0%": { opacity: 0, transform: "translate(-50%, -44%) scale(.9)" },
   "100%": { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
 });
 
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
-  backgroundColor: "rgba(0, 0, 0, .7)",
+  backgroundColor: "rgba(0, 0, 0, .4)",
   position: "fixed",
   inset: 0,
-  backdropFilter: "blur(5px)",
+  backdropFilter: "blur(8px)",
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards`,
   },
@@ -31,9 +31,12 @@ const StyledContent = styled(DialogPrimitive.Content, {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "90vw",
-  maxWidth: "450px",
+  maxWidth: "800px",
   maxHeight: "85vh",
   padding: 25,
+  "@lg": {
+    padding: 40,
+  },
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards`,
   },
