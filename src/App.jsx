@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { IconSearch, IconChevronRight, IconChevronLeft } from "@tabler/icons";
 import { usePagination } from "@mantine/hooks";
 
@@ -11,6 +11,7 @@ import Input from "./components/Input";
 import Container from "./components/Container";
 import Typography from "./components/Typography";
 import CharacterItem from "./components/Character";
+import Spinner from "./components/Spinner";
 import api from "./utils/axios";
 
 /* Setting the global styles for the app. */
@@ -81,6 +82,14 @@ function App() {
             lineHeight: 1.5,
             fontWeight: 800,
             fontSize: "1.5rem",
+            textShadow: `0 0 rgb(255 255 255),
+            0 0 rgb(0   0   255),
+            0 0 rgb(0   255 0  )`,
+            "&:hover": {
+              textShadow:
+                ".2px -.05px rgb(255 254 254), .08px .13px rgb(0   0   255), .1px -.15px rgb(0   255 0  )",
+              transition: ".2s cubic-bezier(0.5,880,0.5,-880)",
+            },
             "@lg": {
               fontSize: "3rem",
               marginBottom: 30,
@@ -102,7 +111,9 @@ function App() {
           }}
         >
           <Input
-            placeholder={`Search all ${paginationInfo.count} characters`}
+            placeholder={`Search all ${
+              !isLoading ? paginationInfo.count : ""
+            } characters`}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             css={{
@@ -124,6 +135,7 @@ function App() {
               alignItems: "center",
               justifyContent: "center",
               width: 50,
+              color: "$primary",
               "& > svg": {
                 width: 16,
                 "@lg": {
@@ -137,10 +149,8 @@ function App() {
         </Box>
 
         {isLoading ? (
-          <Box css={{ textAlign: "center" }}>
-            <Typography as="h2" css={{ fontSize: "1.5rem", fontWeight: 700 }}>
-              Loading...
-            </Typography>
+          <Box css={{ marginTop: "20" }}>
+            <Spinner css={{ marginInline: "auto" }} />
           </Box>
         ) : (
           <Box
@@ -169,9 +179,10 @@ function App() {
               <IconButton
                 disabled={pagination.active === 1}
                 css={{
-                  backgroundColor: pagination.active === 1 ? "#2980b9" : "#fff",
+                  backgroundColor:
+                    pagination.active === 1 ? "$primary" : "#fff",
                   border: "1px solid #2980b9",
-                  color: pagination.active === 1 ? "#fff" : "#2980b9",
+                  color: pagination.active === 1 ? "#fff" : "$primary",
                   borderRadius: "4px",
                   "&:disabled": {
                     cursor: "not-allowed",
@@ -188,9 +199,9 @@ function App() {
                     key={i}
                     css={{
                       backgroundColor:
-                        pagination.active === item ? "#2980b9" : "#fff",
-                      border: "1px solid #2980b9",
-                      color: pagination.active === item ? "#fff" : "#2980b9",
+                        pagination.active === item ? "$primary" : "#fff",
+                      border: "1px solid $primary",
+                      color: pagination.active === item ? "#fff" : "$primary",
                       borderRadius: "4px",
                     }}
                     onClick={() => pagination.setPage(item)}
@@ -208,13 +219,13 @@ function App() {
                 css={{
                   backgroundColor:
                     pagination.active === paginationInfo.pages
-                      ? "#2980b9"
+                      ? "$primary"
                       : "#fff",
-                  border: "1px solid #2980b9",
+                  border: "1px solid $primary",
                   color:
                     pagination.active === paginationInfo.pages
                       ? "#fff"
-                      : "#2980b9",
+                      : "$primary",
                   borderRadius: "4px",
                   "&:disabled": {
                     cursor: "not-allowed",

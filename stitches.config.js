@@ -1,4 +1,5 @@
 import { createStitches } from "@stitches/react";
+import { blue, blueDark } from "@radix-ui/colors";
 
 export const {
   styled,
@@ -15,7 +16,9 @@ export const {
       sansSerif: "Outfit, sans-serif",
     },
     colors: {
-      primary: "#2980b9",
+      ...blue,
+      blueDark,
+      primary: "$blue10",
     },
   },
   media: {

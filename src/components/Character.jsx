@@ -63,7 +63,7 @@ const CharacterItem = ({ data }) => {
           <Dialog>
             <DialogTrigger asChild>
               <Button size="small">
-                <IconInfoCircle /> More Info
+                <IconInfoCircle size={16} /> More Info
               </Button>
             </DialogTrigger>
             <DialogContent>
@@ -71,7 +71,7 @@ const CharacterItem = ({ data }) => {
                 css={{
                   fontWeight: 800,
                   fontSize: 20,
-                  marginBlockEnd: 40,
+                  marginBlockEnd: 30,
                   color: "#212529",
                   "@lg": {
                     fontSize: 40,
@@ -140,7 +140,7 @@ const CharacterItem = ({ data }) => {
               </Box>
 
               <DialogClose asChild>
-                <IconButton>
+                <IconButton css={{ color: "$primary" }}>
                   <IconX />
                 </IconButton>
               </DialogClose>
