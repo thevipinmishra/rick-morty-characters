@@ -36,7 +36,7 @@ const globalStyles = globalCss({
 function App() {
   globalStyles();
 
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme("dark");
   const [theme, setTheme] = useState(colorScheme);
   const [characters, setCharacters] = useState([]);
   const [paginationInfo, setPaginationInfo] = useState([]);
@@ -175,10 +175,18 @@ function App() {
             onValueChange={(value) => setTheme(value)}
             aria-label="Toggle Theme"
           >
-            <ToggleGroupItem value="light" aria-label="Toggle Light Theme">
+            <ToggleGroupItem
+              title="Toggle Light Theme"
+              value="light"
+              aria-label="Toggle Light Theme"
+            >
               <IconSunHigh size={20} />
             </ToggleGroupItem>
-            <ToggleGroupItem value="dark" aria-label="Toggle Dark Theme">
+            <ToggleGroupItem
+              title="Toggle Dark Theme"
+              value="dark"
+              aria-label="Toggle Dark Theme"
+            >
               <IconMoonStars size={20} />
             </ToggleGroupItem>
           </ToggleGroup>

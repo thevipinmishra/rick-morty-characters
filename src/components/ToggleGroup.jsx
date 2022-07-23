@@ -13,7 +13,7 @@ const StyledItem = styled(ToggleGroupPrimitive.Item, {
   color: "$bodyText",
   cursor: "pointer",
   height: 35,
-  width: 35,
+  width: 45,
   display: "flex",
   fontSize: 15,
   lineHeight: 1,
