@@ -22,7 +22,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, {
 });
 
 const StyledContent = styled(DialogPrimitive.Content, {
-  backgroundColor: "white",
+  backgroundColor: "$paper",
   borderRadius: 6,
   boxShadow:
     "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
@@ -55,13 +55,11 @@ function Content({ children, ...props }) {
 const StyledTitle = styled(DialogPrimitive.Title, {
   margin: 0,
   fontWeight: 500,
-  color: "#4a5568",
   fontSize: 17,
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
   margin: "10px 0 20px",
-  color: "#4a5568",
   fontSize: 15,
   lineHeight: 1.5,
 });

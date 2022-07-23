@@ -1,5 +1,5 @@
 import { createStitches } from "@stitches/react";
-import { blue, blueDark } from "@radix-ui/colors";
+import { blue, gray, mauveDark } from "@radix-ui/colors";
 
 export const {
   styled,
@@ -17,8 +17,16 @@ export const {
     },
     colors: {
       ...blue,
-      blueDark,
+      ...gray,
+      ...mauveDark,
       primary: "$blue10",
+      primaryContrast: "$gray1",
+      primaryDisabled: "$blue4",
+      bodyBg: "$gray2",
+      card: "$gray1",
+      bodyText: "$gray12",
+      textLight: "$gray11",
+      paper: "$gray1",
     },
   },
   media: {
@@ -26,7 +34,17 @@ export const {
     md: "(min-width: 768px)",
     lg: " (min-width: 992px)",
   },
-  utils: {
-    marginX: (value) => ({ marginLeft: value, marginRight: value }),
+});
+
+export const darkTheme = createTheme({
+  colors: {
+    primary: "$blue12",
+    primaryContrast: "$gray1",
+    primaryDisabled: "$blue4",
+    bodyBg: "$mauve4",
+    card: "$mauve1",
+    bodyText: "$mauve12",
+    textLight: "$mauve9",
+    paper: "$mauve3",
   },
 });

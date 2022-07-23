@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { IconSearch, IconChevronRight, IconChevronLeft } from "@tabler/icons";
-import { usePagination } from "@mantine/hooks";
-
-import { globalCss } from "../stitches.config";
+import { IconSearch, IconSunHigh, IconMoonStars } from "@tabler/icons";
+import { usePagination, useColorScheme } from "@mantine/hooks";
+import { globalCss, darkTheme } from "../stitches.config";
 import Box from "./components/Box";
-import Stack from "./components/Stack";
-import IconButton from "./components/IconButton";
 import Input from "./components/Input";
 import Container from "./components/Container";
 import Typography from "./components/Typography";
 import CharacterItem from "./components/Character";
 import Spinner from "./components/Spinner";
+import { ToggleGroup, ToggleGroupItem } from "./components/ToggleGroup";
+import Pagination from "./features/Pagination";
 import api from "./utils/axios";
 
 /* Setting the global styles for the app. */
@@ -25,8 +24,8 @@ const globalStyles = globalCss({
     fontFamily: "$sansSerif",
     fontSize: "1rem",
     lineHeight: "1.5",
-    backgroundColor: "#f5f5f5",
-    color: "#4a5568",
+    backgroundColor: "$bodyBg !important",
+    color: "$bodyText",
   },
   img: {
     display: "block",
@@ -37,6 +36,8 @@ const globalStyles = globalCss({
 function App() {
   globalStyles();
 
+  const colorScheme = useColorScheme();
+  const [theme, setTheme] = useState(colorScheme);
   const [characters, setCharacters] = useState([]);
   const [paginationInfo, setPaginationInfo] = useState([]);
   const [search, setSearch] = useState("");
@@ -62,9 +63,14 @@ function App() {
     }
   );
 
+  useEffect(() => {
+    document.body.classList.add(theme === "dark" ? darkTheme : "lightTheme");
+
+    return () => (document.body.className = "");
+  }, [theme]);
+
   return (
     <Box
-      className="App"
       css={{
         paddingBlockStart: 20,
         paddingBlockEnd: 40,
@@ -136,6 +142,11 @@ function App() {
               justifyContent: "center",
               width: 50,
               color: "$primary",
+
+              [`.${darkTheme} &`]: {
+                color: "$bodyText",
+              },
+
               "& > svg": {
                 width: 16,
                 "@lg": {
@@ -148,8 +159,33 @@ function App() {
           </Box>
         </Box>
 
+        <Box
+          css={{
+            marginBlockEnd: 30,
+            display: "flex",
+            justifyContent: "center",
+            "@lg": {
+              marginBlockEnd: 50,
+            },
+          }}
+        >
+          <ToggleGroup
+            type="single"
+            value={theme}
+            onValueChange={(value) => setTheme(value)}
+            aria-label="Toggle Theme"
+          >
+            <ToggleGroupItem value="light" aria-label="Toggle Light Theme">
+              <IconSunHigh size={20} />
+            </ToggleGroupItem>
+            <ToggleGroupItem value="dark" aria-label="Toggle Dark Theme">
+              <IconMoonStars size={20} />
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </Box>
+
         {isLoading ? (
-          <Box css={{ marginTop: "20" }}>
+          <Box css={{ marginTop: 40 }}>
             <Spinner css={{ marginInline: "auto" }} />
           </Box>
         ) : (
@@ -170,75 +206,11 @@ function App() {
 
         {/* Pagination  */}
 
-        {!isLoading && (
-          <Box css={{ marginBlockStart: 50 }}>
-            <Stack
-              direction="row"
-              css={{ gap: "10px", justifyContent: "center", flexWrap: "wrap" }}
-            >
-              <IconButton
-                disabled={pagination.active === 1}
-                css={{
-                  backgroundColor:
-                    pagination.active === 1 ? "$primary" : "#fff",
-                  border: "1px solid #2980b9",
-                  color: pagination.active === 1 ? "#fff" : "$primary",
-                  borderRadius: "4px",
-                  "&:disabled": {
-                    cursor: "not-allowed",
-                    opacity: ".5",
-                  },
-                }}
-                onClick={() => pagination.previous()}
-              >
-                <IconChevronLeft />
-              </IconButton>
-              {pagination.range.map((item, i) =>
-                typeof item === "number" ? (
-                  <IconButton
-                    key={i}
-                    css={{
-                      backgroundColor:
-                        pagination.active === item ? "$primary" : "#fff",
-                      border: "1px solid $primary",
-                      color: pagination.active === item ? "#fff" : "$primary",
-                      borderRadius: "4px",
-                    }}
-                    onClick={() => pagination.setPage(item)}
-                  >
-                    {item}
-                  </IconButton>
-                ) : (
-                  <Box key={i} css={{ color: "#7f8c8d" }}>
-                    ...
-                  </Box>
-                )
-              )}
-              <IconButton
-                disabled={pagination.active === paginationInfo.pages}
-                css={{
-                  backgroundColor:
-                    pagination.active === paginationInfo.pages
-                      ? "$primary"
-                      : "#fff",
-                  border: "1px solid $primary",
-                  color:
-                    pagination.active === paginationInfo.pages
-                      ? "#fff"
-                      : "$primary",
-                  borderRadius: "4px",
-                  "&:disabled": {
-                    cursor: "not-allowed",
-                    opacity: ".5",
-                  },
-                }}
-                onClick={() => pagination.next()}
-              >
-                <IconChevronRight />
-              </IconButton>
-            </Stack>
-          </Box>
-        )}
+        <Pagination
+          isLoading={isLoading}
+          pagination={pagination}
+          paginationInfo={paginationInfo}
+        />
       </Container>
       {!isLoading && (
         <Box
@@ -250,6 +222,10 @@ function App() {
             "& > a": {
               color: "$primary",
               textDecoration: "none",
+
+              [`.${darkTheme} &`]: {
+                color: "$bodyText",
+              },
             },
             "@lg": {
               fontSize: 18,

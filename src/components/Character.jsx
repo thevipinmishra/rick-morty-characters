@@ -1,4 +1,4 @@
-import { styled } from "../../stitches.config";
+import { styled, darkTheme } from "../../stitches.config";
 import Box from "./Box";
 import IconButton from "./IconButton";
 import {
@@ -14,7 +14,7 @@ import { IconInfoCircle, IconX } from "@tabler/icons";
 import Typography from "./Typography";
 
 const CharacterBox = styled("div", {
-  background: "#fff",
+  backgroundColor: "$card",
   padding: "1.35rem",
   borderRadius: ".5rem",
   boxShadow:
@@ -48,7 +48,7 @@ const CharacterItem = ({ data }) => {
             fontWeight: 800,
             fontSize: "1.25rem",
             lineHeight: 1.3,
-            color: "#2c3e50",
+            color: "$bodyText",
             "@lg": {
               fontSize: "1.5rem",
             },
@@ -56,7 +56,7 @@ const CharacterItem = ({ data }) => {
         >
           {data.name}
         </Typography>
-        <Typography css={{ color: "#7f8c8d" }}>{data.status}</Typography>
+        <Typography css={{ color: "$textLight" }}>{data.status}</Typography>
 
         {/* Dialog  */}
         <Box css={{ marginBlockStart: 20 }}>
@@ -72,7 +72,6 @@ const CharacterItem = ({ data }) => {
                   fontWeight: 800,
                   fontSize: 20,
                   marginBlockEnd: 30,
-                  color: "#212529",
                   "@lg": {
                     fontSize: 40,
                   },
@@ -140,7 +139,14 @@ const CharacterItem = ({ data }) => {
               </Box>
 
               <DialogClose asChild>
-                <IconButton css={{ color: "$primary" }}>
+                <IconButton
+                  css={{
+                    color: "$primary",
+                    [`.${darkTheme} &`]: {
+                      color: "$bodyText",
+                    },
+                  }}
+                >
                   <IconX />
                 </IconButton>
               </DialogClose>

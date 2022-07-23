@@ -8,8 +8,8 @@ const Button = styled("button", {
   "&:disabled": {
     cursor: "default",
     pointerEvents: "none",
-    backgroundColor: "#ddd",
-    color: "#ccc",
+    backgroundColor: "$blue4",
+    color: "$blue6",
   },
 
   display: "inline-flex",
@@ -22,7 +22,7 @@ const Button = styled("button", {
   cursor: "pointer",
   borderRadius: ".4rem",
   backgroundColor: "$primary",
-  color: "#fff",
+  color: "$primaryContrast",
   "&:focus-visible": {
     outline: "2px dotted $primary",
   },
