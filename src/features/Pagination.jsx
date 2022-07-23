@@ -17,6 +17,7 @@ const Pagination = ({ isLoading, pagination, paginationInfo }) => {
               disabled={pagination.active === 1}
               variant={pagination.active === 1 ? "filled" : "outlined"}
               onClick={() => pagination.previous()}
+              aria-label="Go to Previous Page"
             >
               <IconChevronLeft />
             </IconButton>
@@ -24,6 +25,7 @@ const Pagination = ({ isLoading, pagination, paginationInfo }) => {
               typeof item === "number" ? (
                 <IconButton
                   key={i}
+                  aria-label={`Go to Page ${item}`}
                   variant={pagination.active === item ? "filled" : "outlined"}
                   onClick={() => pagination.setPage(item)}
                 >
@@ -37,6 +39,7 @@ const Pagination = ({ isLoading, pagination, paginationInfo }) => {
             )}
             <IconButton
               disabled={pagination.active === paginationInfo?.pages}
+              aria-label="Go to Next Page"
               variant={
                 pagination.active === paginationInfo?.pages
                   ? "filled"
