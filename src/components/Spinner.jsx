@@ -1,4 +1,4 @@
-import { styled, keyframes } from "../../stitches.config";
+import { styled, keyframes, darkTheme } from "../../stitches.config";
 
 const spinnerRotate = keyframes({
   to: { transform: "rotate(1turn)" },
@@ -10,6 +10,9 @@ const Spinner = styled("div", {
   aspectRatio: 1,
   borderRadius: "50%",
   background: "$primary",
+  [`.${darkTheme} &`]: {
+    background: "$bodyText",
+  },
   "--_m":
     "conic-gradient(#0000 10%,#000), linear-gradient(#000 0 0) content-box",
   "-webkit-mask": "var(--_m)",

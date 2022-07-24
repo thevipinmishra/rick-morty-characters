@@ -19,7 +19,7 @@ export const {
       ...blue,
       ...gray,
       ...mauveDark,
-      primary: "$blue10",
+      primary: "$blue9",
       primaryContrast: "$gray1",
       primaryDisabled: "$blue4",
       bodyBg: "$gray2",
@@ -44,7 +44,7 @@ export const darkTheme = createTheme({
     bodyBg: "$mauve4",
     card: "$mauve1",
     bodyText: "$mauve12",
-    textLight: "$mauve9",
+    textLight: "$mauve11",
     paper: "$mauve3",
   },
 });

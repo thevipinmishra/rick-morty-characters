@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { IconSearch, IconSunHigh, IconMoonStars } from "@tabler/icons";
-import { usePagination, useColorScheme } from "@mantine/hooks";
+import { usePagination, useLocalStorage } from "@mantine/hooks";
 import { globalCss, darkTheme } from "../stitches.config";
 import Box from "./components/Box";
 import Input from "./components/Input";
@@ -36,8 +36,10 @@ const globalStyles = globalCss({
 function App() {
   globalStyles();
 
-  const colorScheme = useColorScheme("dark");
-  const [theme, setTheme] = useState(colorScheme);
+  const [theme, setTheme] = useLocalStorage({
+    key: "color-scheme",
+    defaultValue: "light",
+  });
   const [characters, setCharacters] = useState([]);
   const [paginationInfo, setPaginationInfo] = useState([]);
   const [search, setSearch] = useState("");
